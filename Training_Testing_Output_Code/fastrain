@@ -1,0 +1,65 @@
+#!/usr/bin/env python
+import argparse
+from fishandra.logutils import createlogs
+import fishandra.loader_constants as loader_constants
+from fishandra.train import train
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('data', type=str, nargs='+',
+                        help='Trajectories data files')
+    parser.add_argument('--model', type=str, default='attention',
+                        help='model type, attention or interaction')
+    parser.add_argument('--topological_attention', action='store_true')
+
+
+    parser.add_argument('--future_steps', type=int, default=32,
+                        help='future to be predicted, in frames')
+    parser.add_argument('--history_steps', type=int, default=0,
+                        help='past data, in frames')
+
+    parser.add_argument('--num_neighbours', type=int, default=25,
+                        help='number of neighbours to be considered in model')
+
+    parser.add_argument('--attention_variables', type=str, nargs='+', default=[],
+                help='Variables in attention. Only to be used with attention_general')
+
+    parser.add_argument('--blind', type=str, nargs='+', default=[],
+                help='blind model to (nbv, nba, nbat, nban, fv, fa, fat, fan)')
+    parser.add_argument('--sigma', type=float, default=1.0,
+                        help='data filtering')
+    parser.add_argument('--remove_outer', type=float, default=.8,
+                        help='fraction of the radius')
+
+    parser.add_argument('--batch_size', type=int, default=500,
+                        help='minibatch size')
+    # Number of epochs parameter
+    parser.add_argument('--num_epochs', type=int, default=100,
+                        help='number of epochs')
+
+    # Frequency at which the model should be saved parameter
+    #parser.add_argument('--save_metadata_every', type=int, default=-1,
+    #                    help='metadata save frequency')
+    parser.add_argument('--save_path', type=str, default='save/default',
+                        help='Path to save')
+    # Learning rate parameterse
+    parser.add_argument('--learning_rate', type=float, default=5e-4,
+                        help='learning rate')
+    parser.add_argument('--decay_rate', type=float, default=0.95,
+                        help='decay for learning rate in each epoch')
+    parser.add_argument('--min_learning_rate', type=float, default=1e-5,
+                        help='Minimum learning rate')
+
+    parser.add_argument('--integration_arch', type=int, nargs='+',
+                        default=[128], help='')
+    parser.add_argument('--pairwise_arch', type=int, nargs='+',
+                        default=[128, 128, 128], help='')
+    parser.add_argument('--attention_arch', type=int, nargs='+',
+                        default=[128, 128, 128], help='')
+
+    args = parser.parse_args()
+    loader_constants.REMOVE_OUTER = args.remove_outer
+    # create_folder(args.save_path)
+
+    logresults, logger = createlogs('./logs/results_huvec_2.log', './logs/debug_huvec_2.log')
+    train(args, logresults=logresults)

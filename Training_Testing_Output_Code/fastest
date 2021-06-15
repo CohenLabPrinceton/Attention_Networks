@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+import argparse
+from fishandra.logutils import createlogs
+from fishandra.test import test
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('data', type=str, nargs='+',
+                        help='Trajectories data files')
+    #parser.add_argument('--model', type=str, default='attention',
+    #                    help='model type, attention or interaction')
+    parser.add_argument('--future_steps', type=int, default=32,
+                        help='future to be predicted, in frames')
+    #parser.add_argument('--num_neighbours', type=int, default=25,
+    #                    help='number of neighbours to be considered in model')
+
+    parser.add_argument('--blind', type=str, nargs='+', default='[]',
+                help='blind model to (nbv, nba, nbat, nban, fv, fa, fat, fan)')
+    parser.add_argument('--sigma', type=float, default=1.0,
+                        help='data filtering')
+
+    parser.add_argument('--batch_size', type=int, default=500,
+                        help='minibatch size')
+    # Number of epochs parameter
+    parser.add_argument('--num_epochs', type=int, default=90,
+                        help='number of epochs')
+
+    # Frequency at which the model should be saved parameter
+    #parser.add_argument('--save_metadata_every', type=int, default=-1,
+    #                    help='metadata save frequency')
+    parser.add_argument('--model_folder', type=str, default='save/default',
+                        help='Path to the folder where the model is stored')
+    # Learning rate parameterse
+    parser.add_argument('--learning_rate', type=float, default=5e-4,
+                        help='learning rate')
+    parser.add_argument('--decay_rate', type=float, default=0.95,
+                        help='decay for learning rate in each epoch')
+    parser.add_argument('--min_learning_rate', type=float, default=1e-5,
+                        help='Minimum learning rate')
+
+    args = parser.parse_args()
+
+    logresults, logger = createlogs('./logs/results_huvec_2.log', './logs/debug_huvec_2.log')
+    test(args, logresults=logresults)
