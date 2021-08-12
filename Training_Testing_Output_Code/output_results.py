@@ -1,3 +1,6 @@
+# This script was produced by the Polavieja Lab. Original source code can be found here:
+#   https://gitlab.com/polavieja_lab/fishandra
+
 import argparse
 from fishandra.sample_with_model import sample_with_model, sample_with_model_separate
 
