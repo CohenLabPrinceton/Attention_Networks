@@ -1,6 +1,8 @@
 # Attention_Networks
 Our code for the application of deep attention networks to recover collective rules from cell trajectory data.
 
+----------------------------------------------------------------------------
+
 This code was derived from the code produced by the Polavieja Lab and the Champalimaud Neuroscience Programme:
 https://polavieja_lab.gitlab.io/
 
