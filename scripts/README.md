@@ -1,5 +1,17 @@
 This folder contains handy scripts for data pre-processing and plotting. 
 
+----------------------------------------------------------------------------
+
+This code was derived from the code produced by the Polavieja Lab and the Champalimaud Neuroscience Programme:
+https://polavieja_lab.gitlab.io/
+
+Their original "attention networks" code can be found here:
+https://gitlab.com/polavieja_lab/fishandra
+
+This code was published under a GPL license. Our code is an adaptation of the de Polavieja code enabling application to cell behavior. 
+
+----------------------------------------------------------------------------
+
 The Jupyter notebook "General_XML_Parser.ipynb" contains Python code demonstrating how to turn an XML file output from the ImageJ/FIJI TrackMate plugin into .npy files containing cell trajectory data. 
 
 These .npy files are used to train and test the attention networks (see other folder for exact code we used for this), and to generate useful output files. 
