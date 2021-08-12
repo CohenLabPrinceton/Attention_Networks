@@ -1,3 +1,6 @@
+# This script was produced by the Polavieja Lab. Original source code can be found here:
+#   https://gitlab.com/polavieja_lab/fishandra
+
 """ datasetfrontend
 
 Tools to select variables to be used during prediction. It works by blinding
