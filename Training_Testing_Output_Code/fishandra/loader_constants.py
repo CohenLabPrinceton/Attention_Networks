@@ -1,3 +1,6 @@
+# This script was produced by the Polavieja Lab. Original source code can be found here:
+#   https://gitlab.com/polavieja_lab/fishandra
+
 # This module is used as a singleton
 # This means that sometimes these variables will be modified
 # particularly at the level of the script
